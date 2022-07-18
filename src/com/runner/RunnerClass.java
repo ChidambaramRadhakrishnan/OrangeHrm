@@ -37,11 +37,9 @@ void login()
 
 
 }
-@AfterMethod
-void close() throws InterruptedException
+void quit()
 {
-	Thread.sleep(3000);
-	driver.quit();
+	driver.close();
 }
 
 }
