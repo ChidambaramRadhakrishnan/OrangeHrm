@@ -42,9 +42,6 @@ public class CommonUtilities {
 	{
 		driver.get(url);
 	}
-	public void click(WebElement ele)
-	{
-		ele.click();
-	}
+	
 
 }
