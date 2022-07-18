@@ -1,46 +1,52 @@
 package com.runner;
 
-import org.openqa.selenium.support.PageFactory;
+
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import com.base.CommonUtilities;
 import com.pageObjectManager.PageObjectManager;
-import com.pom.HomePageObjects;
+
+import com.pom.LogInPageObjetcs;
 
 public class RunnerClass extends CommonUtilities{
 
-	
 
-HomePageObjects obj;
 
-	
-@BeforeClass
+	LogInPageObjetcs obj;
+	SoftAssert sa=new SoftAssert();
+
+
+	@BeforeClass
 	public static void aunch() {
 		browserlaunch("chrome");
 	}
-@BeforeMethod
-void launchurl()
-{
-	launchUrl("https://opensource-demo.orangehrmlive.com/");
-	PageObjectManager page=new PageObjectManager(driver);
-}
-@Test
-void login()
-{
+	@BeforeMethod
+	void launchurl()
+	{
+		launchUrl("https://opensource-demo.orangehrmlive.com/");
+		PageObjectManager page=new PageObjectManager(driver);
+	}
+	@Test
+	void login()
+	{
+
+		PageObjectManager.logInPAgeObj() .getUsername().sendKeys("Admin");
+		PageObjectManager.logInPAgeObj() .getPassword().sendKeys("admin123");
+		PageObjectManager.logInPAgeObj() .getLogin().click();
+		sa.assertEquals("Admin",PageObjectManager.homePageObj().getAdminButton().getText());
 	
-	PageObjectManager.objHomepage() .getUsername().sendKeys("Admin");
-	PageObjectManager.objHomepage() .getPassword().sendKeys("admin123");
-	PageObjectManager.objHomepage() .getLogin().click();
+		
 
 
-}
-@AfterMethod
-void quit()
-{
-	driver.close();
-}
+	}
+	@AfterMethod
+	void quit()
+	{
+		driver.close();
+	}
 
 }
