@@ -37,6 +37,7 @@ void login()
 
 
 }
+@AfterMethod
 void quit()
 {
 	driver.close();
